@@ -11,8 +11,8 @@
 	<body>
 		<div class="container"><br>
 			<div class="row">
-				<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
-				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+				
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<?php
 					$mysqli = new mysqli('localhost', 'root', '', 'reciclick');
 					
@@ -36,11 +36,19 @@
 						{
 						?>
 						<tr>
-							<td><?php echo $usuarios["nombre"]; ?></td>
-							<td><?php echo $usuarios["correo"]; ?></td>
-							<td><?php echo $usuarios["telefono"]; ?></td>
-							<td><?php echo $usuarios["clave"]; ?></td>
-							<td><a href="registroEliminar.php?id=<?php echo $usuarios["id"]; ?>" class="btn btn-danger">Eliminar</a> </td>
+							<form name="actualizar<?php echo $usuarios["id"]; ?>" id="actualizar<?php echo $usuarios["id"]; ?>" method="post" action="registroActualizar.php">
+								<td><input type="text" name="nombre" id="nombre" class="form-control" value="<?php echo $usuarios["nombre"]; ?>"></td>
+								<td><input type="text" name="correo" id="correo" class="form-control" value="<?php echo $usuarios["correo"]; ?>"></td>
+								<td><input type="text" name="telefono" id="telefono" class="form-control" value="<?php echo $usuarios["telefono"]; ?>"></td>
+								<td>
+									<input type="text" name="clave" id="clave" class="form-control" value="<?php echo $usuarios["clave"]; ?>">
+									<input type="hidden" name="id" id="id" value="<?php echo $usuarios["id"]; ?>" >
+								</td>
+							</form>
+							<td>
+								<a href="registroEliminar.php?id=<?php echo $usuarios["id"]; ?>" class="btn btn-danger">Eliminar</a> &nbsp;&nbsp;
+								<a href="#" onclick="document.forms.actualizar<?php echo $usuarios["id"]; ?>.submit();" class="btn btn-warning">Actualizar</a>
+							</td>
 						</tr>
 						<?php
 						}
@@ -48,7 +56,7 @@
 						?>
 					</table>
 				</div>
-				<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"></div>
+				
 			</div>
 			<center><a class="btn btn-success" href="registro.php">Volver</a></center>
 		</div>
